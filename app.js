@@ -3,15 +3,19 @@
 //   * Use ES6 syntax here please.
 
 // Create function that will listen for spacebar hit and call the generate colors function.
+
 var changeColors = function() {
     for (var i = 0; i < 5; i++) {
-        var col = document.getElementsByClassName("col")[i];
-        col.style.background = colors[i];
-        col.style.height = "90vh";
-        col.style.outline = "0.4em solid black";
-        col.style.fontFamily = "Courier";
-        col.style.color = "black";
-        col.innerHTML = "<h1>" + colors[i] + "</h1> <p>Click to copy!</p> ";
+        var col = $("#col" + i);
+        col.css(
+            {
+                "background-color": colors[i],
+                "height": "90vh",
+                "outline": "0.4em solid black",
+                "fontFamily": "Courier",
+                "color:": "Black"
+            });
+        col.html("<h1>" + colors[i] + "</h1> <p>Click to copy!</p> ");
     }
 } 
 
@@ -32,23 +36,23 @@ window.onload = function() {
     changeColors(colors);
 }
 
-document.addEventListener('click', event=> {
+$(document).on('click', event=> {
     for (var i = 0; i < 5; i++) {
         var colID = "col" + i;
-        var col = document.getElementById(colID);
-        var color = col.innerText;
-        color = color.substring(0, color.indexOf("\n"));
-        if (col.innerText.includes("Copied!")) {
-            col.innerHTML = "<h1>" + color + "</h1> <p>Click to copy!</p> ";   
+        var col = $("#" + colID);
+        var color = col.text();
+        color = color.substring(0, color.indexOf(" "));
+        if (col.text().includes("Copied!")) {
+            col.html("<h1>" + color + "</h1> <p>Click to copy!</p> ");
         }
         if (event.target.id == colID) {
             navigator.clipboard.writeText(color);
-            col.innerHTML = "<h1>" + color + "</h1> <p>Copied!</p> ";
+            col.html("<h1>" + color + "</h1> <p>Copied!</p> ");
         }
     }
 })
 
-document.addEventListener('keyup', event=> {
+$(document).on('keyup', event=> {
     if (event.code == "Space") {
         colors = colorGen.next().value;
         changeColors();

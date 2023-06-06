@@ -1,0 +1,13 @@
+.body {
+    background-color: #28282B;
+}
+
+.jumbotron.text-center {
+    background-color:#5A5A5A;
+    outline: 0.4em solid gray;
+    outline-width: 50;
+}
+
+.row {
+    text-align: center;
+}
