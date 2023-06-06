@@ -7,15 +7,18 @@
 var changeColors = function() {
     for (var i = 0; i < 5; i++) {
         var col = $("#col" + i);
+        var h1 = $("#col" + i + " h1");
+        var p1 = $("#col" + i + " p");
         col.css(
             {
                 "background-color": colors[i],
                 "height": "90vh",
                 "outline": "0.4em solid black",
                 "fontFamily": "Courier",
-                "color:": "Black"
+                "color": "Black"
             });
-        col.html("<h1>" + colors[i] + "</h1> <p>Click to copy!</p> ");
+        h1.text(colors[i]);
+        p1.text("Click to copy!");
     }
 } 
 
@@ -40,14 +43,17 @@ $(document).on('click', event=> {
     for (var i = 0; i < 5; i++) {
         var colID = "col" + i;
         var col = $("#" + colID);
-        var color = col.text();
-        color = color.substring(0, color.indexOf(" "));
+        var h1 = $("#" + colID + " h1");
+        var p1 = $("#" + colID + " p");
+        var color = h1.text();
         if (col.text().includes("Copied!")) {
-            col.html("<h1>" + color + "</h1> <p>Click to copy!</p> ");
+            h1.text(color);
+            p1.text("Click to copy!");
         }
         if (event.target.id == colID) {
             navigator.clipboard.writeText(color);
-            col.html("<h1>" + color + "</h1> <p>Copied!</p> ");
+            h1.text(color);
+            p1.text("Copied!");
         }
     }
 })
